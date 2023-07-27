@@ -1,19 +1,32 @@
 #!/usr/bin/env bash
-#Creating a script that uses case statements
-x=1
-while [ $x -le 20 ]
-do
-    echo "$x"
-    case $x in
+#A Bash script that displays numbers from 1 to 20 and:
+#displays 4 and then bad luck from China for the 4th loop iteration
+#displays 9 and then bad luck from Japan for the 9th loop iteration
+#displays 17 and then bad luck from Italy for the 17th loop iteration
+
+number=1
+while [ $number -le 20 ]
+do 
+	case $number in
+	
 	4)
-	    echo "bad luck from China"
-	    ;;
+	echo "4"
+	echo "bad luck from China"
+	;;
+
 	9)
-	    echo "bad luck from Japan"
-	    ;;
+	echo "9"
+	echo "bad luck from Japan"
+	;;
+
 	17)
-	    echo "bad luck from Italy"
-	    ;;
-    esac
-    ((x++))
+	echo "17"
+	echo "bad luck from Italy"
+	;;
+
+	*)
+	echo $number
+	;;
+	esac
+	number=$((number+1))
 done
