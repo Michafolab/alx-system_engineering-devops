@@ -1,13 +1,18 @@
-Processes and signals
+**Processes and signals**
+
+![image](https://github.com/Michafolab/alx-system_engineering-devops/assets/117805721/380a4dea-c21a-4e5e-901c-b3764a06ffc8)
+![image](https://github.com/Michafolab/alx-system_engineering-devops/assets/117805721/cb7387c9-059f-4bc5-8fb2-1b700caf0b6a)
+
+
 *********************************************************
 
 
 
-Project done during Full Stack Software Engineering studies at ALX School. It aims to learn about PID, processes and commands that handles them (ps, pgrep, pkill, kill, etc) in Bash.
+**Project done during Full Stack Software Engineering studies at ALX School. It aims to learn about PID, processes and commands that handles them (ps, pgrep, pkill, kill, etc) in Bash.**
 ***************************************************************************
 
 
-Technologies
+**Technologies**
 Scripts written in Bash 4.3.11(1)
 Tested on Ubuntu 20.04 LTS
 
