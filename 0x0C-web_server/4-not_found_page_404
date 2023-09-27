@@ -1,11 +1,8 @@
 #!/usr/bin/env bash
-# install and setup nginx server
-sudo apt-get update
-sudo apt-get install nginx -y
-echo "Hello World!" | sudo tee /var/www/html/index.html
-
-# permanently redirects traffic from /redirect_me to anther url
-# and displays a custom 404 page
-
-echo "Ceci n'est pas une page" | sudo tee /var/www/html/custom_404.html
-text="\\\n\tlocation /redirect_me {\n\t\treturn 301 https://www.youtube.com/watch?v=QH2-TGUlwu4;\n\t}\n\n\terror_page 404 /custom_404.html;\n\tlocation = /custom_404.
+# Script that installs Nginx server, redirects /redirect_me and customizes 404 not found
+apt-get -y update
+apt-get -y install nginx
+echo "Holberton School" > /var/www/html/index.nginx-debian.html
+echo "Ceci n'est pas une page" > /usr/share/nginx/html/custom_404.html
+sed -i "s/server_name _;/server_name _;\n\trewrite ^\/redirect_me https:\/\/github.com\/michafolab permanent;\n\n\terror_page 404 \/custom_404.html;\n\tlocation = \/custom_404.html {\n\t\troot \/usr\/share\/nginx\/html;\n\t\tinternal;\n\t}/" /etc/nginx/sites-available/default
+service nginx start
