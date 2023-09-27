@@ -1,0 +1,11 @@
+#!/usr/bin/env bash
+# install and setup nginx server
+sudo apt-get update
+sudo apt-get install nginx -y
+echo "Hello World!" | sudo tee /var/www/html/index.html
+
+# permanently redirects traffic from /redirect_me to anther url
+# and displays a custom 404 page
+
+echo "Ceci n'est pas une page" | sudo tee /var/www/html/custom_404.html
+text="\\\n\tlocation /redirect_me {\n\t\treturn 301 https://www.youtube.com/watch?v=QH2-TGUlwu4;\n\t}\n\n\terror_page 404 /custom_404.html;\n\tlocation = /custom_404.
