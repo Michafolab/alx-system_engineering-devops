@@ -1,7 +1,28 @@
 #!/usr/bin/env bash
 # Script that installs Nginx server and redirects /redirect_me
-apt-get -y update
-apt-get -y install nginx
-echo "Hello World!" > /var/www/html/index.html
-sed -i "s/server_name _;/server_name _;\n\trewrite ^\/redirect_me https:\/\/github.com\/michafolab permanent;/" /etc/nginx/sites-available/default
-service nginx start
+#Install Nginx if its not installed
+sudo apt install nginx -y
+
+#Create a configuration file for the redirection
+echo "server {
+	listen 80 default_server;
+	
+	root /var/www/html;
+	index index.html index.htm index.nginx-debian.html
+	server_name _;
+
+	location /redirect_me {
+		return 301 'https://m.youtube.com/watch?v=QH2-TGUlwu4';
+	}
+
+	# Add other server configuration here if needed
+}" | sudo tee /etc/nginx/sites-available/redirect_me
+
+# Create a symbolic link to enable the configuration
+sudo ln -s /etc/nginx/sites-available/redirect_me /etc/nginx/sites-enabled/
+
+# Test Nginx configuration to make sure there are no syntax error
+sudo nginx -t
+
+# Reload Nginx to supply the changes
+sudo service nginx restart
