@@ -1,8 +1,9 @@
 #!/usr/bin/env bash
 # Script that installs Nginx server and redirects /redirect_me
-#Install Nginx if its not installed
-sudo apt update 
+# Update the package list to ensure we have the latest informatiom
+sudo apt update
 
+#Install Nginx if its not installed
 sudo apt install nginx -y
 
 #Create a configuration file for the redirection
