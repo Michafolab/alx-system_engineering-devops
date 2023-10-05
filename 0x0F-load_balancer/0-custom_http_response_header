@@ -1,0 +1,49 @@
+#!/usr/bin/env bash
+# Update the package list
+sudo apt update
+
+# Install Nginx
+sudo apt install nginx -y
+
+#get the hostname
+hostname=$(hostname)
+
+#Remove the default Nginx server if it exists
+sudo rm -f /etc/nginx/sites-enabled/default
+
+#Create a configuration file for the redirection
+echo "server {
+        listen 80 default_server;
+
+        root /var/www/html;
+        index index.html index.htm index.nginx-debian.html
+        server_name _;
+
+        location /redirect_me {
+                return 301 'https://m.youtube.com/watch?v=QH2-TGUlwu4';
+        }
+
+        # Configure custom 404 error page
+        error_page 404 /custom_404.html;
+        location = /custom_404.html {
+                root /var/www/html;
+                internal;
+	}
+
+	add_header X-Served-By $hostname;
+	
+
+        # Add other server configuration here if needed
+}" | sudo tee /etc/nginx/sites-available/redirect_me
+
+# Create a symbolic link to enable the configuration
+sudo ln -s /etc/nginx/sites-available/redirect_me /etc/nginx/sites-enabled/
+
+# Create a custom 404 error page
+echo "Ceci n'est pas une page" | sudo tee /var/www/html/custom_404.html
+
+# Test Nginx configuration to make sure there are no syntax error
+sudo nginx -t
+
+# Reload Nginx to supply the changes
+sudo service nginx restart
