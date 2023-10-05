@@ -14,8 +14,8 @@ frontend http
 	default_backend web_backend
 backend web_backend
 	balance roundrobin
-	server 141946-web-01 34.204.60.206:80 check
-	server 141946-web-02 52.87.216.0:80 check
+	server 215355-web-01 34.204.82.187:80 check
+	server 215355-web-02 100.27.4.21:80 check
 "
 echo "$server_config" | sudo tee -a /etc/haproxy/haproxy.cfg
 
