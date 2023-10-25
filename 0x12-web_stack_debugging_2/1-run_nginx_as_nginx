@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+# Nginx running as main user
+# listen to port 8080 only
+service nginx stop
+pkill -f apache2
+sed -i 's/80/8080/g' /etc/nginx/sites-available/default
+sed -i '1s/^/user nginx;\n/' /etc/nginx/nginx.conf
+chmod 644 /etc/nginx/nginx.conf
+sudo -u nginx service nginx restart
