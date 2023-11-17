@@ -1,0 +1,27 @@
+server {
+        listen 80;
+        server_name localhost;
+
+        location /airbnb-onepage/ {
+                include proxy_params;
+                proxy_pass http://localhost:5000/airbnb-onepage/;
+        }
+
+        location /airbnb-dynamic/number_odd_or_even/ {
+                include proxy_params;
+                proxy_pass http://localhost:5001/number_odd_or_even/;
+                proxy_redirect off;
+        }
+
+        location /api/ {
+                proxy_pass http://localhost:5002/api/;
+                proxy_redirect off;
+        }
+
+	location / {
+		proxy_pass http://5003/2-hbnb;
+	}
+	location /static/ {
+		alias /home/ubuntu/AirBnB_clone_v4/web_dynamic/static/;
+		proxy_redirect off;
+}
